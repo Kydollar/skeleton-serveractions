@@ -18,6 +18,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.3.2",
 		"@next-auth/prisma-adapter": "0.4.4-canary.81",
 		"@prisma/client": "^5.7.0",
 		"@radix-ui/react-icons": "^1.3.0",
@@ -36,9 +37,12 @@
 		"numeral": "^2.0.6",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-hook-form": "^7.48.2",
+		"slugify": "^1.6.6",
 		"sonner": "^1.2.4",
 		"tailwind-merge": "^2.1.0",
-		"tailwindcss-animate": "^1.0.7"
+		"tailwindcss-animate": "^1.0.7",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@ianvs/prettier-plugin-sort-imports": "^4.1.1",

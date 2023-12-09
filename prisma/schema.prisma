@@ -80,9 +80,31 @@ datasource db {
 model Movie {
   id          String    @id @default(cuid())
   title       String
+  slug        String    @unique
   description String?
   releaseDate DateTime?
   imageUrl    String? // URL or path to the movie's image
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+
+  category     MovieCategory @relation(fields: [categorySlug], references: [slug])
+  categorySlug String
+
+  tags MovieTag[]
+
+  published Boolean @default(false)
+}
+
+model MovieCategory {
+  name String @db.VarChar(255)
+  slug String @id @unique
+
+  Movie Movie[]
+}
+
+model MovieTag {
+  name String @db.VarChar(255)
+  slug String @id @unique
+
+  Movie Movie[]
 }
