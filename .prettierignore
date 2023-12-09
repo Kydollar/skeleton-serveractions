@@ -1,0 +1,26 @@
+# .prettierignore
+
+cache
+.cache
+
+node_modules/
+.next/
+.git/
+prisma/
+
+**/*.json
+**/*.yaml
+
+next.config.mjs
+postcss.config.js
+prettier.config.js
+tailwind.config.ts
+postcss.config.js
+
+README.md
+
+CHANGELOG.md
+dist
+.yarn
+
+tsconfig.tsbuildinfo
