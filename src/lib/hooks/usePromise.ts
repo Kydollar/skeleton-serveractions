@@ -1,4 +1,4 @@
-export const getDelay = async (ms = 2000) => {
+export async function getDelay(ms = 2000) {
     const promise = await new Promise<Boolean>((resolve) => {
         setTimeout(() => {
             resolve(true);
@@ -7,9 +7,9 @@ export const getDelay = async (ms = 2000) => {
         return res;
     });
     return promise;
-};
+}
 
-export default async function Await<T>({
+export async function Await<T>({
     promise,
     children,
 }: {
