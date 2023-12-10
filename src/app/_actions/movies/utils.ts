@@ -1,3 +1,5 @@
+'use server';
+
 import slugify from 'slugify';
 
 import { db } from '@/lib/db';

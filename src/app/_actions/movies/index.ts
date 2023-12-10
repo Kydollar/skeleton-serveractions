@@ -1,3 +1,5 @@
+'use server';
+
 // movies action
 import { revalidatePath } from 'next/cache';
 import { Prisma } from '@prisma/client';
@@ -51,7 +53,7 @@ const createMovieAction = async ({
         },
     });
 
-    revalidatePath('/');
+    revalidatePath('/movies');
 
     return movie;
 };
@@ -74,8 +76,10 @@ const getMoviesAction = async ({
     const skip = (page - 1) * limit;
 
     // Build Prisma where conditions
-    const where: Prisma.MovieWhereInput = {
-        OR: [
+    const where: Prisma.MovieWhereInput = {};
+
+    if (search) {
+        where.OR = [
             {
                 title: {
                     contains: search,
@@ -88,8 +92,8 @@ const getMoviesAction = async ({
                     mode: 'insensitive',
                 },
             },
-        ],
-    };
+        ];
+    }
 
     if (categoryslug) {
         where.category = {
@@ -120,7 +124,7 @@ const getMoviesAction = async ({
 
     // Fetch movies based on the publication status and additional filters
     const movies = await db.movie.findMany({
-        where,
+        where, //next step
         skip,
         take: limit,
         orderBy: { createdAt: 'desc' },
@@ -129,6 +133,7 @@ const getMoviesAction = async ({
     await sleep(1000);
 
     const totalPages = Math.ceil(totalMovies / limit);
+    console.log(movies);
 
     return {
         movies,
@@ -136,4 +141,21 @@ const getMoviesAction = async ({
     };
 };
 
-export { createMovieAction, getMoviesAction };
+const getCategoriesAction = async () => {
+    const categories = await db.movieCategory.findMany();
+
+    return categories;
+};
+
+const getTagsAction = async () => {
+    const tags = await db.movieTag.findMany();
+
+    return tags;
+};
+
+export {
+    createMovieAction,
+    getTagsAction,
+    getMoviesAction,
+    getCategoriesAction,
+};

@@ -72,7 +72,7 @@ export default function RootLayout({
                     >
                         <NextAuthSessionProvider>
                             {authModal}
-                            {children}
+                            <main className="container py-8">{children}</main>
                             <ClientProvider />
                         </NextAuthSessionProvider>
                     </TooltipProvider>
